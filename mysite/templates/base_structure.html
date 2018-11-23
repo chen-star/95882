@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'base_header.html' %}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+    <title>{% block title %}{% endblock %}</title>
+</head>
+
+<body>
+{% load static %}
+<div class="container">
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container d-flex flex-column flex-md-row flex-lg-row justify-content-between">
+            <a class="navbar-brand" href="{% url 'car_stream' %}">
+                {% load static %}
+                <img src="{% static '/img/cmu_logo.png' %}" width="30" height="30" alt="cmu_log">
+            </a>
+            {% block links %}
+            {% endblock %}
+        </div>
+    </nav>
+
+    <div class="jumbotron">
+        <h1 align="center"><strong>Cool Cars</strong></h1>
+        <p align="center">A featureful and interactive web application for drivers share car information.</p>
+        <p align="center">Get started with your car journey!</p>
+    </div>
+
+    {% block content %}
+    {% endblock %}
+
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+        <div align="center">CopyRight © 2017-2018 Jiaxin Chen. All Rights Reserved.</div>
+    </footer>
+
+</div>
+</body>
+</html>

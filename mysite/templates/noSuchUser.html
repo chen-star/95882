@@ -1,0 +1,13 @@
+{% extends 'base_structure.html' %}
+{% block title %}Home{% endblock %}
+{% block links %}
+    <a class="py-2 d-none d-md-inline-block text-light bg-dark" href="{% url 'car_stream' %}">Car
+        Stream</a>
+    <a class="py-2 d-none d-md-inline-block text-light bg-dark" href="{% url 'user_login' %}">Log In</a>
+    <a class="py-2 d-none d-md-inline-block text-light bg-dark" href="{% url 'user_logout' %}">Log Out</a>
+{% endblock %}
+{% block content %}
+    <div align="center">
+        <h2>This user does not exist!</h2>
+    </div>
+{% endblock %}

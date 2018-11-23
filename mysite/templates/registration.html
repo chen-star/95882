@@ -1,0 +1,33 @@
+{% extends 'base_structure.html' %}
+{% block title %}Registration{% endblock %}
+{% block links %}
+    <a class="py-2 d-none d-md-inline-block text-light bg-dark" href="{% url 'car_stream' %}">Car Stream</a>
+    <a class="py-2 d-none d-md-inline-block text-light bg-dark" href="{% url 'user_login' %}">Login</a>
+{% endblock %}
+{% block content %}
+    <div class="col-md-12 pb-5 pt-3">
+        <h3 class="mb-4">Create Your Account</h3>
+        <form method="post">
+            {% csrf_token %}
+            {% include 'base_form.html' with form=form %}
+            <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
+            <br><br>
+            <div>
+                {% if f.errors %}
+                    {% for field in f %}
+                        {% for error in field.errors %}
+                            <div class="alert alert-danger">
+                                <strong>{{ error|escape }}</strong>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in f.non_field_errors %}
+                        <div class="alert alert-danger">
+                            <strong>{{ error|escape }}</strong>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </form>
+    </div>
+{% endblock %}
