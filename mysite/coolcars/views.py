@@ -1,4 +1,3 @@
-from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import send_mail
@@ -12,9 +11,14 @@ from django.urls import reverse
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 
-from django.views.decorators.csrf import ensure_csrf_cookie
+from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
 from coolcars.forms import *
 from coolcars.tokens import account_activation_token
+
+
+# home
+def home(request):
+    return HttpResponseRedirect(reverse('car_stream'))
 
 
 @ensure_csrf_cookie
@@ -97,6 +101,313 @@ def registration(request):
         c['form'] = f
         c.update(csrf(request))
         return render_to_response('registration.html', c, RequestContext(request))
+
+
+# car stream
+def car_stream(request):
+    dic = {}
+    if request.user.is_authenticated:
+        dic['logged'] = True
+
+    posts = Post.objects.all().order_by("-published_date")
+
+    comments = Comment.objects.all().order_by("time")
+    coms = {}
+    for comment in comments:
+        com = {}
+        current_comment = "comment" + str(comment.id)
+        current_post = "post" + str(comment.post.id)
+        username = comment.username.username
+        content = comment.content
+        time = comment.time
+        com["post_id"] = current_post
+        com["username"] = username
+        com["content"] = content
+        com["time"] = time
+        coms[current_comment] = com
+
+    temp = {}
+    count = 0
+    for post in posts:
+        current_post = posts[count]
+        postno = 'post' + str(post.id)
+        li = []
+        username = current_post.username
+        title = current_post.title
+        content = current_post.content
+        published_date = current_post.published_date
+        li.append(postno)
+        li.append(username)
+        li.append(title)
+        li.append(content)
+        li.append(published_date)
+        count += 1
+        temp[postno] = li
+
+    dic["posts"] = temp
+    dic["comments"] = coms
+    return render(request, "carStream.html", dic)
+
+
+# following stream
+@ensure_csrf_cookie
+@login_required
+@transaction.atomic
+def followerstream(request):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('home'))
+
+    current_user = Info.objects.get(username=request.user)
+    followees_info = current_user.followers.all().values_list('info__followers', flat=True)
+    posts = Post.objects.filter(username__in=followees_info).order_by("-published_date")
+
+    comments = Comment.objects.all().order_by("time")
+    coms = {}
+    for comment in comments:
+        com = {}
+        current_comment = "comment" + str(comment.id)
+        current_post = "post" + str(comment.post.id)
+        username = comment.username.username
+        content = comment.content
+        time = comment.time
+        com["post_id"] = current_post
+        com["username"] = username
+        com["content"] = content
+        com["time"] = time
+        coms[current_comment] = com
+
+    dic = {}
+    temp = {}
+    count = 0
+    for post in posts:
+        current_post = posts[count]
+        li = []
+        post_id = "post" + str(current_post.id)
+        username = current_post.username
+        title = current_post.title
+        content = current_post.content
+        published_date = current_post.published_date
+        li.append(post_id)
+        li.append(username)
+        li.append(title)
+        li.append(content)
+        li.append(published_date)
+        temp[post_id] = li
+        count += 1
+
+    dic["posts"] = temp
+    dic["comments"] = coms
+    return render(request, "followerStream.html", dic)
+
+
+# add a new post
+@ensure_csrf_cookie
+@login_required
+@transaction.atomic
+def add_post(request):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('home'))
+
+    if not 'title' in request.POST or not request.POST['title']:
+        return HttpResponseRedirect(reverse('car_stream'))
+    elif not 'content' in request.POST or not request.POST['content']:
+        return HttpResponseRedirect(reverse('car_stream'))
+    else:
+        username = request.user
+        new_post = Post(title=request.POST['title'], content=request.POST["content"], username=username)
+        new_post.save()
+
+    dic = {
+        "title": new_post.title,
+        "content": new_post.content,
+        "published_date": new_post.published_date,
+    }
+
+    return render(request, "newPost_success.html", dic)
+
+
+# user profile
+@csrf_exempt
+@login_required
+def profile(request):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('home'))
+
+    username = request.GET.get("username", '')
+    current_user = User.objects.get(username=username)
+
+    if username == request.user.username:
+        return redirect(reverse('myprofile'))
+
+    username = current_user.username
+    firstname = current_user.first_name
+    lastname = current_user.last_name
+    dic = {
+        "username": username,
+        "firstname": firstname,
+        "lastname": lastname
+    }
+
+    comments = Comment.objects.all().order_by("time")
+    coms = {}
+    for comment in comments:
+        com = {}
+        current_comment = "comment" + str(comment.id)
+        current_post = "post" + str(comment.post.id)
+        username = comment.username.username
+        content = comment.content
+        time = comment.time
+        com["post_id"] = current_post
+        com["username"] = username
+        com["content"] = content
+        com["time"] = time
+        coms[current_comment] = com
+    dic["comments"] = coms
+
+    followee = Info.objects.get(username=current_user)
+    dic["followed"] = True if Info.objects.get(username=request.user).followers.filter(
+        username=followee).exists() else False
+
+    posts = Post.objects.all().filter(username=current_user).order_by("-published_date")
+    temp = {}
+    count = 0
+    for post in posts:
+        current_post = posts[count]
+        li = []
+        post_id = "post" + str(post.id)
+        username = current_post.username
+        title = current_post.title
+        content = current_post.content
+        published_date = current_post.published_date
+        li.append(post_id)
+        li.append(username)
+        li.append(title)
+        li.append(content)
+        li.append(published_date)
+        temp[post_id] = li
+        count += 1
+    dic["post"] = temp
+
+    dic["age"] = ""
+    dic['bio'] = "A happy CMU student!"
+    for item in Info.objects.all().filter(username=current_user):
+        dic["age"] = item.age
+        dic["bio"] = item.bio
+
+    return render(request, "profile.html", dic)
+
+
+# my profile
+@ensure_csrf_cookie
+@login_required
+def myprofile(request):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('home'))
+
+    current_user = User.objects.get(username=request.user.username)
+
+    username = current_user.username
+    firstname = current_user.first_name
+    lastname = current_user.last_name
+    dic = {
+        "username": username,
+        "firstname": firstname,
+        "lastname": lastname
+    }
+
+    comments = Comment.objects.all().order_by("time")
+    coms = {}
+    for comment in comments:
+        com = {}
+        current_comment = "comment" + str(comment.id)
+        current_post = "post" + str(comment.post.id)
+        username = comment.username.username
+        content = comment.content
+        time = comment.time
+        com["post_id"] = current_post
+        com["username"] = username
+        com["content"] = content
+        com["time"] = time
+        coms[current_comment] = com
+    dic["comments"] = coms
+
+    posts = Post.objects.all().filter(username=current_user).order_by("-published_date")
+    temp = {}
+    count = 0
+    for post in posts:
+        current_post = posts[count]
+        li = []
+        post_id = "post" + str(post.id)
+        username = current_post.username
+        title = current_post.title
+        content = current_post.content
+        published_date = current_post.published_date
+        li.append(post_id)
+        li.append(username)
+        li.append(title)
+        li.append(content)
+        li.append(published_date)
+        temp[post_id] = li
+        count += 1
+    dic["post"] = temp
+
+    dic["age"] = ""
+    dic['bio'] = "A happy CMU student!"
+    for item in Info.objects.all().filter(username=current_user):
+        dic["age"] = item.age
+        dic["bio"] = item.bio
+
+    return render(request, "myprofile.html", dic)
+
+
+@ensure_csrf_cookie
+@login_required
+@transaction.atomic
+def follow(request):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('home'))
+
+    follower = Info.objects.get(username=request.user)
+    followee = Info.objects.get(username=User.objects.filter(username=request.POST.get("followee", ''))[0])
+
+    follower.followers.add(followee)
+    follower.save()
+    followee.save()
+    return HttpResponseRedirect(reverse('followerstream'))
+
+
+@ensure_csrf_cookie
+@login_required
+@transaction.atomic
+def unfollow(request):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('home'))
+
+    follower = Info.objects.get(username=request.user)
+    followee = Info.objects.get(username=User.objects.filter(username=request.POST.get("followee", ''))[0])
+
+    follower.followers.remove(followee)
+    follower.save()
+    followee.save()
+
+    return HttpResponseRedirect(reverse('followerstream'))
+
+
+# add comment
+@login_required
+@transaction.atomic
+@csrf_exempt
+def add_comment(request):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('home'))
+
+    post_id = request.POST.get('post_id', '')
+    comment_content = request.POST.get('comment_content', '')
+    current_uesr = request.user
+
+    new_comment = Comment(username=current_uesr, post=Post.objects.get(id=post_id[4:]), content=comment_content)
+    new_comment.save()
+    return redirect(reverse('car_stream'))
 
 
 # activate account
@@ -185,6 +496,7 @@ def password_reset_confirm(request, uidb64, token):
         return HttpResponse('Activation link is invalid!')
 
 
+# password
 def pw(request):
     if request.method == 'POST':
         username = request.POST.get('username', '')
@@ -198,19 +510,3 @@ def pw(request):
         user.set_password(password)
         user.save()
         return render(request, 'login.html', {"pw_status": 'ok'})
-
-
-# car stream
-def car_stream(request):
-    if request.user.is_authenticated:
-        return render(request, 'carStream.html', {'logged': True})
-
-    if request.method == "GET":
-        #     posts = Post.objects.filter().order_by('time').reverse()
-        #     post_form = PostForm(instance=request.user)
-        #     max_time = Post.get_max_time()
-        #
-        #     context = {'posts': posts, 'max_time': max_time, 'post_form': post_form}
-        return render(request, 'carStream.html', {'logged': False})
-    else:
-        raise Http404

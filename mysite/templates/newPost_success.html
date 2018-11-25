@@ -1,0 +1,23 @@
+{% extends 'base_structure.html' %}
+{% block title %}New Post Success{% endblock %}
+{% block links %}
+    <a class="py-2 d-none d-md-inline-block text-light bg-dark" href="{% url 'car_stream' %}">Car
+        Stream</a>
+    <a class="py-2 d-none d-md-inline-block text-light bg-dark" href="{% url 'user_logout' %}">Log Out</a>
+{% endblock %}
+{% block content %}
+    <div align="center">
+        <h2>Your new Post success!</h2>
+        <div class="d-flex flex-row justify-content-center pb-2 pt-3 align-self-center">
+            <div class="col">
+                Title: {{ title }}
+            </div>
+            <div class="col">
+                Content: {{ content }}
+            </div>
+            <div class="col">
+                Publish Time: {{ published_date }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

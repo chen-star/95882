@@ -1,0 +1,33 @@
+{% extends 'base_profle.html' %}
+{% block title %}My Profile{% endblock %}
+{% block links %}
+    <a class="py-2 d-none d-md-inline-block text-light bg-dark" href="{% url 'car_stream' %}">Car
+        Stream</a>
+    <a class="py-2 d-none d-md-inline-block text-light bg-dark" href="{% url 'followerstream' %}">Following
+        Stream</a>
+    <a class="py-2 d-none d-md-inline-block text-light bg-dark" href="{% url 'user_logout' %}">Log Out</a>
+{% endblock %}
+{% block follow %}
+    <div class="pb-2" align="center">
+        <div class="d-flex flex-row justify-content-center pb-2 pt-3 align-self-center">
+            {% if not followed %}
+                <div class="pl-4 pr-4">
+                    <form action="{% url 'follow' %}" method="post">{% csrf_token %}
+                        <input type="text" class="form-control col-md-10 mb-3" name="followee"
+                               value={{ username }} hidden="hidden">
+                        <input class="btn btn-primary" type="submit" value="Follow">
+                    </form>
+                </div>
+            {% endif %}
+            {% if followed %}
+                <div class="pl-4 pr-4">
+                    <form action="{% url 'unfollow' %}" method="post">{% csrf_token %}
+                        <input type="text" class="form-control col-md-10 mb-3" name="followee"
+                               value={{ username }} hidden="hidden">
+                        <input class="btn btn-primary" type="submit" value="Unfollow">
+                    </form>
+                </div>
+                </div>
+            {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends 'base_profle.html' %}
+{% block title %}My Profile{% endblock %}
+{% block links %}
+    <a class="py-2 d-none d-md-inline-block text-light bg-dark" href="{% url 'car_stream' %}">Car
+        Stream</a>
+    <a class="py-2 d-none d-md-inline-block text-light bg-dark" href="{% url 'followerstream' %}">Following
+        Stream</a>
+    <a class="py-2 d-none d-md-inline-block text-light bg-dark" href="{% url 'user_logout' %}">Log Out</a>
+{% endblock %}

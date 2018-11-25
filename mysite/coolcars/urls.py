@@ -1,11 +1,12 @@
 from django.conf.urls import url
 from django.conf.urls.static import static
 from django.conf import settings
-from django.urls import path
+from django.urls import path, re_path
 
 from coolcars import views
 
 urlpatterns = [
+                  url(r'^$', views.home, name='home'),
                   url(r'^userlogin$', views.user_login, name='user_login'),
                   url(r'^userlogout$', views.user_logout, name='user_logout'),
                   url(r'^carStream$', views.car_stream, name="car_stream"),
@@ -16,5 +17,12 @@ urlpatterns = [
                   path('pw', views.pw, name="pw"),
                   url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
                       views.password_reset_confirm, name='password_reset_confirm'),
+                  path('addPost', views.add_post, name='add_post'),
+                  path('myprofile', views.myprofile, name='myprofile'),
+                  re_path('^profile/', views.profile, name="profile"),
+                  path('followerstream/', views.followerstream, name='followerstream'),
+                  path('follow', views.follow, name='follow'),
+                  path('unfollow', views.unfollow, name='unfollow'),
+                  path('add_comment', views.add_comment, name='add_comment'),
 
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
