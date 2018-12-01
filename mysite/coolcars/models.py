@@ -21,9 +21,10 @@ class Post(models.Model):
     title = models.CharField(max_length=50)
     content = models.CharField(max_length=100)
     published_date = models.DateTimeField(default=timezone.now)
+    favorite = models.IntegerField(default=0)
 
     def __str__(self):
-        return "{0}, {1}, {2}, {3}".format(self.username, self.title, self.content, self.published_date)
+        return "{0}, {1}, {2}, {3}, {4}".format(self.username, self.title, self.content, self.published_date, self.favorite)
 
 
 # comments

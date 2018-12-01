@@ -112,7 +112,8 @@ def car_stream(request):
     if request.user.is_authenticated:
         dic['logged'] = True
 
-    posts = Post.objects.all().order_by("-published_date")
+    posts = Post.objects.all().order_by("-favorite")
+    print(posts)
 
     comments = Comment.objects.all().order_by("time")
     coms = {}
@@ -144,6 +145,7 @@ def car_stream(request):
         li.append(title)
         li.append(content)
         li.append(published_date)
+        li.append(current_post.favorite)
         count += 1
         temp[postno] = li
 
@@ -575,6 +577,7 @@ def search_user(request):
         li.append(title)
         li.append(content)
         li.append(published_date)
+        li.append(Vote.objects.get(username=current_post.username).no_vote)
         count += 1
         temp[postno] = li
 
@@ -624,3 +627,16 @@ def vote(request):
     votes = Vote.objects.all().order_by('-no_vote')
     context['votes'] = votes
     return render(request, 'vote.html', context)
+
+
+@login_required
+def favorite(request):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('home'))
+
+    post_id = request.POST.get('post_id', '')
+    post = Post.objects.get(id=post_id[4:])
+    post.favorite = post.favorite + 1
+    post.save()
+
+    return redirect(reverse('car_stream'))
