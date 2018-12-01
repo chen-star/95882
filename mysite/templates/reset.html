@@ -1,10 +1,9 @@
 {% extends 'base_structure.html' %}
-{% block title %}Home{% endblock %}
+{% block title %}Reset Password{% endblock %}
 {% block links %}
-    <a class="py-2 d-none d-md-inline-block text-light bg-dark" href="{% url 'car_stream' %}">Car
-        Stream</a>
-    <a class="py-2 d-none d-md-inline-block text-light bg-dark" href="{% url 'user_login' %}">Log In</a>
-    <a class="py-2 d-none d-md-inline-block text-light bg-dark" href="{% url 'user_logout' %}">Log Out</a>
+    <a class="py-2 d-none d-md-inline-block text-light bg-dark" href="{% url 'car_stream' %}">Car Stream</a>
+    <a class="py-2 d-none d-md-inline-block text-light bg-dark" href="{% url 'registration' %}">Registration</a>
+    <a class="py-2 d-none d-md-inline-block text-light bg-dark" href="{% url 'user_login' %}">Login</a>
 {% endblock %}
 {% block content %}
     <div class="row">
@@ -20,7 +19,8 @@
                                        min="3">
                             </div>
                             <div>
-                                <input class="btn btn-primary btn-lg btn-block col-md-10" type="submit" value="Send Email">
+                                <input class="btn btn-primary btn-lg btn-block col-md-10" type="submit"
+                                       value="Send Email">
                             </div>
                         {% endif %}
                         {% if status %}
@@ -30,7 +30,7 @@
                 </div>
                 <div class="col-md-2 pb-2 pt-5 pl-0">
                     {% load static %}
-                    <img src=" {% static '/grumblr/img/network.png' %}" alt="">
+                    <img src=" {% static 'img/network.png' %}" alt="">
                 </div>
             </div>
         </div>

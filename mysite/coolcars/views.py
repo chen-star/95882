@@ -510,3 +510,57 @@ def pw(request):
         user.set_password(password)
         user.save()
         return render(request, 'login.html', {"pw_status": 'ok'})
+
+
+@login_required
+def search_user(request):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('home'))
+
+    if request.method == 'GET':
+        return render(request, 'searchUser.html')
+
+    dic = {}
+    username = request.POST.get('name', '')
+    try:
+        user = User.objects.get(username=username)
+    except:
+        return render(request, 'noSuchUser.html')
+
+    posts = Post.objects.filter(username=user).order_by("-published_date")
+    comments = Comment.objects.all().order_by("time")
+    coms = {}
+    for comment in comments:
+        com = {}
+        current_comment = "comment" + str(comment.id)
+        current_post = "post" + str(comment.post.id)
+        username = comment.username.username
+        content = comment.content
+        time = comment.time
+        com["post_id"] = current_post
+        com["username"] = username
+        com["content"] = content
+        com["time"] = time
+        coms[current_comment] = com
+
+    temp = {}
+    count = 0
+    for post in posts:
+        current_post = posts[count]
+        postno = 'post' + str(post.id)
+        li = []
+        username = current_post.username
+        title = current_post.title
+        content = current_post.content
+        published_date = current_post.published_date
+        li.append(postno)
+        li.append(username)
+        li.append(title)
+        li.append(content)
+        li.append(published_date)
+        count += 1
+        temp[postno] = li
+
+    dic["posts"] = temp
+    dic["comments"] = coms
+    return render(request, "searchUser.html", dic)

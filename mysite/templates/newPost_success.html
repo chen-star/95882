@@ -1,9 +1,14 @@
 {% extends 'base_structure.html' %}
 {% block title %}New Post Success{% endblock %}
 {% block links %}
-    <a class="py-2 d-none d-md-inline-block text-light bg-dark" href="{% url 'car_stream' %}">Car
-        Stream</a>
-    <a class="py-2 d-none d-md-inline-block text-light bg-dark" href="{% url 'user_logout' %}">Log Out</a>
+        <a class="py-2 d-none d-md-inline-block text-light bg-dark" href="{% url 'myprofile' %}">My profile</a>
+        <a class="py-2 d-none d-md-inline-block text-light bg-dark" href="{% url 'car_stream' %}">Car
+            Stream</a>
+        <a class="py-2 d-none d-md-inline-block text-light bg-dark" href="{% url 'followerstream' %}">Following
+            Stream</a>
+        <a class="py-2 d-none d-md-inline-block text-light bg-dark" href="{% url 'search_user' %}">Search User
+            Content</a>
+        <a class="py-2 d-none d-md-inline-block text-light bg-dark" href="{% url 'user_logout' %}">Log Out</a>
 {% endblock %}
 {% block content %}
     <div align="center">

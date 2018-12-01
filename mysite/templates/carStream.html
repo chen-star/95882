@@ -1,10 +1,14 @@
 {% extends 'base_structure.html' %}
 {% block title %}Global Stream{% endblock %}
 {% block links %}
-    <a class="py-2 d-none d-md-inline-block text-light bg-dark" href="{% url 'myprofile' %}">My profile</a>
-    <a class="py-2 d-none d-md-inline-block text-light bg-dark" href="{% url 'followerstream' %}">Following
-        Stream</a>
     {% if logged %}
+        <a class="py-2 d-none d-md-inline-block text-light bg-dark" href="{% url 'myprofile' %}">My profile</a>
+        <a class="py-2 d-none d-md-inline-block text-light bg-dark" href="{% url 'car_stream' %}">Car
+            Stream</a>
+        <a class="py-2 d-none d-md-inline-block text-light bg-dark" href="{% url 'followerstream' %}">Following
+            Stream</a>
+        <a class="py-2 d-none d-md-inline-block text-light bg-dark" href="{% url 'search_user' %}">Search User
+            Content</a>
         <a class="py-2 d-none d-md-inline-block text-light bg-dark" href="{% url 'user_logout' %}">Log Out</a>
     {% endif %}
     {% if not logged %}
@@ -46,8 +50,14 @@
                                      style="width: 50px; height: 50px;"
                                      src="{% static 'img/profile1.jpg' %}"
                                      data-holder-rendered="true">
-                                <a class="d-inline-block mb-1 ml-3 text-primary align-content-center"
-                                   href="{% url 'profile' %}?username={{ value.1 }}"><strong>{{ value.1 }}</strong></a>
+                                {% if logged %}
+                                    <a class="d-inline-block mb-1 ml-3 text-primary align-content-center"
+                                       href="{% url 'profile' %}?username={{ value.1 }}"><strong>{{ value.1 }}</strong></a>
+                                {% endif %}
+                                {% if not logged %}
+                                    <a class="d-inline-block mb-1 ml-3 text-primary align-content-center"
+                                       href="#"><strong>{{ value.1 }}</strong></a>
+                                {% endif %}
                             </div>
                             <h4 class="mb-0">
                                 <p class="text-dark">{{ value.2 }}</p>
@@ -58,14 +68,16 @@
 
                             {#comment#}
                             <div id="comments" class="">
-                                <form id="{{ value.0 }}" method="post" action="{% url 'add_comment' %}"
-                                      class="new_comment">{% csrf_token %}
-                                    <input type="text" name="comment_content" id="new_input_comment{{ value.0 }}"
-                                           placeholder="add comment here.." required><br><br>
-                                    <input type="text" name="post_id" id="post_id" value="{{ value.0 }}"
-                                           hidden="hidden">
-                                    <button class="btn btn-sm btn-primary" type="submit">Comment</button>
-                                </form>
+                                {% if logged %}
+                                    <form id="{{ value.0 }}" method="post" action="{% url 'add_comment' %}"
+                                          class="new_comment">{% csrf_token %}
+                                        <input type="text" name="comment_content" id="new_input_comment{{ value.0 }}"
+                                               placeholder="add comment here.." required><br><br>
+                                        <input type="text" name="post_id" id="post_id" value="{{ value.0 }}"
+                                               hidden="hidden">
+                                        <button class="btn btn-sm btn-primary" type="submit">Comment</button>
+                                    </form>
+                                {% endif %}
                                 <hr>
                                 <div id="previous_comments">
                                     <div class="panel-footer" id="previous_comments{{ value.0 }}">
@@ -79,8 +91,14 @@
                                                          style="width: 20px; height: 20px;"
                                                          src="{% static 'img/profile1.jpg' %}"
                                                          data-holder-rendered="true">
-                                                    <a class="d-inline-block mb-1 ml-3 ml-2 pl-2 text-primary align-content-center"
-                                                       href="{% url 'profile' %}?username={{ comment.username }}"><strong>{{ comment.username }}</strong></a>
+                                                    {% if logged %}
+                                                        <a class="d-inline-block mb-1 ml-3 ml-2 pl-2 text-primary align-content-center"
+                                                           href="{% url 'profile' %}?username={{ comment.username }}"><strong>{{ comment.username }}</strong></a>
+                                                    {% endif %}
+                                                    {% if not logged %}
+                                                        <a class="d-inline-block mb-1 ml-3 ml-2 pl-2 text-primary align-content-center"
+                                                           href="#"><strong>{{ comment.username }}</strong></a>
+                                                    {% endif %}
                                                     <p align="right" class="text-muted mr-2 pl-2" size="">
                                                         <small>{{ comment.time }}</small>
                                                     </p>
