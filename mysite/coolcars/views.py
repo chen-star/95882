@@ -73,6 +73,9 @@ def registration(request):
             profile = Info(username=user)
             profile.save()
 
+            vote = Vote(username=user)
+            vote.save()
+
             # send verify email
             current_user = User.objects.get(username=username)
             sbj = 'Account Verification'
@@ -521,14 +524,28 @@ def search_user(request):
         return render(request, 'searchUser.html')
 
     dic = {}
-    username = request.POST.get('name', '')
+    usernames = request.POST.get('name', '')
+    username = str.split(usernames, ',')
+    user = []
     try:
-        user = User.objects.get(username=username)
+        # sort acoording to num of votes for user
+        us = User.objects.filter(username__in=username)
+        votes = Vote.objects.filter(username__in=us).order_by('-no_vote')
+        for v in votes:
+            user.append(v.username)
     except:
         return render(request, 'noSuchUser.html')
 
-    posts = Post.objects.filter(username=user).order_by("-published_date")
+    posts = Post.objects.filter(username__in=user).order_by("-published_date")
     comments = Comment.objects.all().order_by("time")
+
+    tmp = []
+    for u in user:
+        p = Post.objects.filter(username=u).order_by("-published_date")
+        for p1 in p:
+            tmp.append(p1)
+    posts = tmp
+
     coms = {}
     for comment in comments:
         com = {}
@@ -575,3 +592,35 @@ def notification(request):
     notifications = Notification.objects.all().order_by("-time")
     context['notifications'] = notifications
     return render(request, 'notification.html', context)
+
+
+@login_required
+def vote(request):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('home'))
+
+    if request.method == 'GET':
+        context = {}
+        votes = Vote.objects.all().order_by('-no_vote')
+        context['votes'] = votes
+        return render(request, 'vote.html', context)
+
+    context = {}
+    user_id = request.POST.get('user_id', '')
+    try:
+        user = User.objects.get(id=user_id)
+        me = request.user
+    except:
+        return render_to_response('noSuchUser.html')
+
+    if user is me:
+        context['voteMyself'] = True
+        return render(request, 'vote.html', context)
+
+    v = Vote.objects.get(username=user)
+    v.no_vote = v.no_vote + 1
+    v.save()
+
+    votes = Vote.objects.all().order_by('-no_vote')
+    context['votes'] = votes
+    return render(request, 'vote.html', context)

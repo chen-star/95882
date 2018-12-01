@@ -45,3 +45,12 @@ class Notification(models.Model):
 
     def __str__(self):
         return "{0}, {1}, {2}".format(self.title, self.content, self.time)
+
+
+# votes
+class Vote(models.Model):
+    username = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    no_vote = models.IntegerField(default=0)
+
+    def __str__(self):
+        return "{0}, {1}".format(self.username, self.no_vote)

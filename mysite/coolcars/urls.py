@@ -26,5 +26,6 @@ urlpatterns = [
                   path('add_comment', views.add_comment, name='add_comment'),
                   url(r'^searchUser', views.search_user, name='search_user'),
                   url(r'^notification', views.notification, name='notification'),
+                  url(r'^vote', views.vote, name='vote'),
 
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
