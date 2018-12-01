@@ -564,3 +564,6 @@ def search_user(request):
     dic["posts"] = temp
     dic["comments"] = coms
     return render(request, "searchUser.html", dic)
+
+
+def notification(request):

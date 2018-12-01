@@ -1,22 +1,11 @@
 {% extends 'base_structure.html' %}
-{% block title %}Search By Username{% endblock %}
+{% block title %}Notification{% endblock %}
 {% block links %}
     {% include 'base_logined_headers.html' %}
 {% endblock %}
 {% block content %}
     <div align="center">
-        <h2>Search content by username</h2>
-        <div class="d-flex flex-row justify-content-center pb-2 pt-3 align-self-center">
-            <form action="{% url 'search_user' %}" method="post" class="form-horizontal" role="form">{% csrf_token %}
-                <div class="form-group">
-                    Username: <input class="form-control" type="text" name="name" id="name">
-                </div>
-                <input class="btn btn-primary" type="submit" value="Search">
-            </form>
-        </div>
-    </div>
-
-    {% if posts %}
+        <h2>Notifications</h2>
         <div class="pre-scrollable" style="max-height: 60vh">
             <ul class="list-group pt-0">
                 <li class="list-group-item" id="new_posts">
@@ -80,7 +69,6 @@
                                                             <a class="d-inline-block mb-1 ml-3 ml-2 pl-2 text-primary align-content-center"
                                                                href="#"><strong>{{ comment.username }}</strong></a>
                                                         {% endif %}
-
                                                         <p align="right" class="text-muted mr-2 pl-2" size="">
                                                             <small>{{ comment.time }}</small>
                                                         </p>
@@ -100,5 +88,5 @@
                 </li>
             </ul>
         </div>
-    {% endif %}
+    </div>
 {% endblock %}
