@@ -1,6 +1,5 @@
 from django.db import models
 
-
 # user info
 from django.utils import timezone
 
@@ -36,3 +35,13 @@ class Comment(models.Model):
 
     def __str__(self):
         return "{0}, {1}, {2}, {3}".format(self.username, self.post, self.content, self.time)
+
+
+# notifications
+class Notification(models.Model):
+    title = models.CharField(max_length=100)
+    content = models.CharField(max_length=300)
+    time = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return "{0}, {1}, {2}".format(self.title, self.content, self.time)

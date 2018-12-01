@@ -2,15 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7ef5a4ba-39e0-4327-8c25-74fbae9e388e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/coolcars/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/coolcars/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/coolcars/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/coolcars/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/coolcars/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/coolcars/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/carStream.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/carStream.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/followerStream.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/followerStream.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/myprofile.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/myprofile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/newPost_success.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/newPost_success.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/noSuchUser.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/noSuchUser.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/profile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/searchUser.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/searchUser.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/notification.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/notification.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,35 +22,35 @@
         <counts>
           <entry key="project.closed" value="3" />
           <entry key="project.open.time.16" value="1" />
-          <entry key="project.open.time.5" value="1" />
+          <entry key="project.open.time.5" value="2" />
           <entry key="project.open.time.6" value="1" />
-          <entry key="project.opened" value="3" />
+          <entry key="project.opened" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="html" value="77" />
+          <entry key="html" value="79" />
           <entry key="jpeg" value="1" />
-          <entry key="py" value="24" />
+          <entry key="py" value="25" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="HTML" value="77" />
+          <entry key="HTML" value="79" />
           <entry key="Image" value="1" />
-          <entry key="Python" value="24" />
+          <entry key="Python" value="25" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="html" value="701" />
-          <entry key="py" value="1370" />
+          <entry key="html" value="761" />
+          <entry key="py" value="1591" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="701" />
-          <entry key="Python" value="1370" />
+          <entry key="HTML" value="761" />
+          <entry key="Python" value="1591" />
         </counts>
       </usages-collector>
     </session>
@@ -65,13 +60,35 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/coolcars/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="638">
-              <caret line="567" selection-start-line="567" selection-end-line="567" />
+            <state relative-caret-position="430">
+              <caret line="571" column="52" lean-forward="true" selection-start-line="571" selection-start-column="52" selection-end-line="571" selection-end-column="52" />
               <folding>
-                <marker date="1543645359698" expanded="true" signature="820:878" ph="..." />
-                <marker date="1543645359698" expanded="true" signature="16004:16301" ph="..." />
-                <marker date="1543645359698" expanded="true" signature="17563:17564" ph="..." />
+                <marker date="1543695707829" expanded="true" signature="820:878" ph="..." />
+                <marker date="1543695707829" expanded="true" signature="16004:16301" ph="..." />
+                <marker date="1543695707829" expanded="true" signature="17674:17679" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/coolcars/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="615">
+              <caret line="41" selection-start-line="41" selection-end-line="41" />
+              <folding>
+                <element signature="e#0#28#0" expanded="true" />
+                <marker date="1543695707839" expanded="true" signature="1370:1375" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/carStream.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="639">
+              <caret line="107" column="30" lean-forward="true" selection-start-line="36" selection-start-column="19" selection-end-line="107" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -79,8 +96,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/notification.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="109">
-              <caret line="9" column="40" lean-forward="true" selection-start-line="9" selection-start-column="40" selection-end-line="9" selection-end-column="40" />
+            <state relative-caret-position="195">
+              <caret line="13" column="62" selection-start-line="13" selection-start-column="62" selection-end-line="13" selection-end-column="62" />
             </state>
           </provider>
         </entry>
@@ -93,15 +110,6 @@
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/carStream.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="32" selection-start-line="32" selection-end-line="112" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -136,7 +144,6 @@
         <option value="$PROJECT_DIR$/templates/login.html" />
         <option value="$PROJECT_DIR$/templates/noSuchUserWithoutLogin.html" />
         <option value="$PROJECT_DIR$/templates/pwReset.html" />
-        <option value="$PROJECT_DIR$/coolcars/models.py" />
         <option value="$PROJECT_DIR$/templates/base_profle.html" />
         <option value="$PROJECT_DIR$/mysite/urls.py" />
         <option value="$PROJECT_DIR$/templates/base_structure.html" />
@@ -150,6 +157,7 @@
         <option value="$PROJECT_DIR$/templates/profile.html" />
         <option value="$PROJECT_DIR$/templates/searchUser.html" />
         <option value="$PROJECT_DIR$/coolcars/urls.py" />
+        <option value="$PROJECT_DIR$/coolcars/models.py" />
         <option value="$PROJECT_DIR$/coolcars/views.py" />
         <option value="$PROJECT_DIR$/templates/notification.html" />
       </list>
@@ -262,12 +270,12 @@
     <frame x="0" y="0" width="1680" height="1050" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25579977" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25885227" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.23979592" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.23979592" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -363,16 +371,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/coolcars/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="46" selection-start-line="22" selection-start-column="46" selection-end-line="22" selection-end-column="46" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/fakePwReset.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -380,13 +378,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
           <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="4" selection-end-column="112" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/base_logined_headers.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="15" lean-forward="true" selection-start-line="6" selection-start-column="15" selection-end-line="6" selection-end-column="15" />
         </state>
       </provider>
     </entry>
@@ -463,18 +454,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/coolcars/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="638">
-          <caret line="567" selection-start-line="567" selection-end-line="567" />
-          <folding>
-            <marker date="1543645359698" expanded="true" signature="820:878" ph="..." />
-            <marker date="1543645359698" expanded="true" signature="16004:16301" ph="..." />
-            <marker date="1543645359698" expanded="true" signature="17563:17564" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/coolcars/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="405">
@@ -485,17 +464,47 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/coolcars/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="430">
+          <caret line="571" column="52" lean-forward="true" selection-start-line="571" selection-start-column="52" selection-end-line="571" selection-end-column="52" />
+          <folding>
+            <marker date="1543695707829" expanded="true" signature="820:878" ph="..." />
+            <marker date="1543695707829" expanded="true" signature="16004:16301" ph="..." />
+            <marker date="1543695707829" expanded="true" signature="17674:17679" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/coolcars/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="615">
+          <caret line="41" selection-start-line="41" selection-end-line="41" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+            <marker date="1543695707839" expanded="true" signature="1370:1375" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/base_logined_headers.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="15" lean-forward="true" selection-start-line="6" selection-start-column="15" selection-end-line="6" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/carStream.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="32" selection-start-line="32" selection-end-line="112" selection-end-column="10" />
+        <state relative-caret-position="639">
+          <caret line="107" column="30" lean-forward="true" selection-start-line="36" selection-start-column="19" selection-end-line="107" selection-end-column="30" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/notification.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="109">
-          <caret line="9" column="40" lean-forward="true" selection-start-line="9" selection-start-column="40" selection-end-line="9" selection-end-column="40" />
+        <state relative-caret-position="195">
+          <caret line="13" column="62" selection-start-line="13" selection-start-column="62" selection-end-line="13" selection-end-column="62" />
         </state>
       </provider>
     </entry>

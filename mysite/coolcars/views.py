@@ -566,4 +566,12 @@ def search_user(request):
     return render(request, "searchUser.html", dic)
 
 
+@login_required
 def notification(request):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('home'))
+    context = {}
+
+    notifications = Notification.objects.all().order_by("-time")
+    context['notifications'] = notifications
+    return render(request, 'notification.html', context)
