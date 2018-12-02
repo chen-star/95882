@@ -15,6 +15,8 @@ from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
 from coolcars.forms import *
 from coolcars.tokens import account_activation_token
 from gsearch.googlesearch import search
+import csv
+import os
 
 
 # home
@@ -76,6 +78,9 @@ def registration(request):
 
             vote = Vote(username=user)
             vote.save()
+
+            s = Search(username=user)
+            s.save()
 
             # send verify email
             current_user = User.objects.get(username=username)
@@ -750,9 +755,40 @@ def NLSearch(request):
 
     if request.method == 'GET':
         return render(request, 'NLSearch.html')
-
     context = {}
     content = request.POST.get('content', '')
+
+    s = Search.objects.get(username=request.user)
+    s.searches.add(content)
+    s.save()
+
     results = search(content, num_results=15)
     context['items'] = results
     return render(request, 'NLSearch.html', context)
+
+
+@login_required
+def recommendations(request):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('home'))
+
+    # export csv
+    if os.path.exists("stats.csv"):
+        os.remove("stats.csv")
+    else:
+        print("The file does not exist")
+
+    with open('stats.csv', 'w', newline='') as csvfile:
+        users = User.objects.all()
+        for user in users:
+            if user.username == 'admin':
+                continue
+            searched = Search.objects.get(username=user).searches.all()
+            spamwriter = csv.writer(csvfile, delimiter='\t',
+                                    quotechar='|', quoting=csv.QUOTE_MINIMAL)
+            tmp = [user.username]
+            for tag in searched:
+                tmp.append(str(tag))
+            spamwriter.writerow(tmp)
+
+    return render(request, 'recommendation.html')

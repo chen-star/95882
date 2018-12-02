@@ -31,5 +31,6 @@ urlpatterns = [
                   url(r'^tagging', views.tagging, name='tagging'),
                   url(r'^searchByTagging', views.search_by_tagging, name='search_by_tagging'),
                   url(r'^nlSearch', views.NLSearch, name='nlSearch'),
+                  url(r'^Recommendations', views.recommendations, name='recommendations'),
 
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

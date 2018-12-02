@@ -26,7 +26,8 @@ class Post(models.Model):
     tags = TaggableManager()
 
     def __str__(self):
-        return "{0}, {1}, {2}, {3}, {4}".format(self.username, self.title, self.content, self.published_date, self.favorite)
+        return "{0}, {1}, {2}, {3}, {4}".format(self.username, self.title, self.content, self.published_date,
+                                                self.favorite)
 
 
 # comments
@@ -58,3 +59,12 @@ class Vote(models.Model):
 
     def __str__(self):
         return "{0}, {1}".format(self.username, self.no_vote)
+
+
+# NL search
+class Search(models.Model):
+    username = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    searches = TaggableManager()
+
+    def __str__(self):
+        return "{0}".format(self.username)
