@@ -2,12 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7ef5a4ba-39e0-4327-8c25-74fbae9e388e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/coolcars/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/coolcars/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/coolcars/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/coolcars/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/coolcars/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/coolcars/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base_logined_headers.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base_logined_headers.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/carStream.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/carStream.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stats.csv" beforeDir="false" afterPath="$PROJECT_DIR$/stats.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/recommendation.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/recommendation.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -24,56 +22,52 @@
         <counts>
           <entry key="project.closed" value="4" />
           <entry key="project.open.time.16" value="1" />
-          <entry key="project.open.time.5" value="2" />
+          <entry key="project.open.time.5" value="3" />
           <entry key="project.open.time.6" value="1" />
-          <entry key="project.opened" value="4" />
+          <entry key="project.opened" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="html" value="105" />
+          <entry key="html" value="106" />
           <entry key="jpeg" value="1" />
-          <entry key="py" value="30" />
+          <entry key="jpg" value="1" />
+          <entry key="py" value="31" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="HTML" value="105" />
-          <entry key="Image" value="1" />
-          <entry key="Python" value="30" />
+          <entry key="HTML" value="106" />
+          <entry key="Image" value="2" />
+          <entry key="Python" value="31" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="html" value="1856" />
-          <entry key="py" value="4417" />
+          <entry key="html" value="1998" />
+          <entry key="py" value="5651" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="1856" />
-          <entry key="Python" value="4417" />
+          <entry key="HTML" value="1998" />
+          <entry key="Python" value="5651" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/coolcars/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="680">
-              <caret line="785" column="71" selection-start-line="785" selection-start-column="71" selection-end-line="785" selection-end-column="71" />
+            <state relative-caret-position="503">
+              <caret line="802" column="38" selection-start-line="802" selection-start-column="38" selection-end-line="802" selection-end-column="38" />
               <folding>
                 <element signature="e#0#57#0" expanded="true" />
-                <marker date="1543720232737" expanded="true" signature="881:939" ph="..." />
-                <marker date="1543720232737" expanded="true" signature="16449:16991" ph="..." />
-                <marker date="1543720232737" expanded="true" signature="18879:18884" ph="..." />
-                <marker date="1543720232737" expanded="true" signature="19473:20339" ph="..." />
-                <marker date="1543720232737" expanded="true" signature="20662:20663" ph="..." />
-                <marker date="1543720232737" expanded="true" signature="21023:21024" ph="..." />
-                <marker date="1543720232737" expanded="true" signature="22888:22889" ph="..." />
-                <marker date="1543720232737" expanded="true" signature="23398:23399" ph="..." />
+                <marker date="1543771508260" expanded="true" signature="918:976" ph="..." />
+                <marker date="1543771508260" expanded="true" signature="16486:17028" ph="..." />
+                <marker date="1543771508260" expanded="true" signature="18916:18921" ph="..." />
               </folding>
             </state>
           </provider>
@@ -83,7 +77,7 @@
         <entry file="file://$PROJECT_DIR$/coolcars/models.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="593">
-              <caret line="69" column="19" lean-forward="true" selection-start-line="69" selection-start-column="19" selection-end-line="69" selection-end-column="19" />
+              <caret line="69" column="19" selection-start-line="69" selection-start-column="19" selection-end-line="69" selection-end-column="19" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
                 <marker date="1543719851056" expanded="true" signature="1557:1562" ph="..." />
@@ -94,11 +88,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/recommendation.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="32" column="14" lean-forward="true" selection-start-line="32" selection-start-column="14" selection-end-line="32" selection-end-column="14" />
+            <state relative-caret-position="510">
+              <caret line="34" column="14" lean-forward="true" selection-start-line="34" selection-start-column="14" selection-end-line="34" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -106,8 +100,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/carStream.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-906">
-              <caret line="37" column="62" selection-start-line="37" selection-start-column="62" selection-end-line="37" selection-end-column="62" />
+            <state relative-caret-position="349">
+              <caret line="54" selection-start-line="54" selection-end-line="56" selection-end-column="33" />
             </state>
           </provider>
         </entry>
@@ -117,8 +111,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -159,11 +153,12 @@
         <option value="$PROJECT_DIR$/templates/notification.html" />
         <option value="$PROJECT_DIR$/templates/NLSearch.html" />
         <option value="$PROJECT_DIR$/coolcars/urls.py" />
-        <option value="$PROJECT_DIR$/templates/recommendation.html" />
         <option value="$PROJECT_DIR$/templates/base_logined_headers.html" />
         <option value="$PROJECT_DIR$/templates/carStream.html" />
         <option value="$PROJECT_DIR$/coolcars/models.py" />
+        <option value="$PROJECT_DIR$/coolcars/trainUserData.py" />
         <option value="$PROJECT_DIR$/coolcars/views.py" />
+        <option value="$PROJECT_DIR$/templates/recommendation.html" />
       </list>
     </option>
   </component>
@@ -183,6 +178,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -209,7 +205,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -272,13 +267,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25885227" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26190478" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.23979592" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.23979592" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -509,17 +505,46 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/static/img/profile1.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/coolcars/trainUserData.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="31" column="25" lean-forward="true" selection-start-line="31" selection-start-column="25" selection-end-line="31" selection-end-column="25" />
+          <folding>
+            <marker date="1543770767882" expanded="true" signature="55:60" ph="..." />
+            <marker date="1543770767882" expanded="true" signature="500:505" ph="..." />
+            <marker date="1543770767882" expanded="true" signature="500:864" ph="..." />
+            <marker date="1543770767882" expanded="true" signature="1653:1672" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/carStream.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-906">
-          <caret line="37" column="62" selection-start-line="37" selection-start-column="62" selection-end-line="37" selection-end-column="62" />
+        <state relative-caret-position="349">
+          <caret line="54" selection-start-line="54" selection-end-line="56" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/coolcars/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="503">
+          <caret line="802" column="38" selection-start-line="802" selection-start-column="38" selection-end-line="802" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#57#0" expanded="true" />
+            <marker date="1543771508260" expanded="true" signature="918:976" ph="..." />
+            <marker date="1543771508260" expanded="true" signature="16486:17028" ph="..." />
+            <marker date="1543771508260" expanded="true" signature="18916:18921" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/coolcars/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="593">
-          <caret line="69" column="19" lean-forward="true" selection-start-line="69" selection-start-column="19" selection-end-line="69" selection-end-column="19" />
+          <caret line="69" column="19" selection-start-line="69" selection-start-column="19" selection-end-line="69" selection-end-column="19" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
             <marker date="1543719851056" expanded="true" signature="1557:1562" ph="..." />
@@ -531,26 +556,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/recommendation.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="32" column="14" lean-forward="true" selection-start-line="32" selection-start-column="14" selection-end-line="32" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/coolcars/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="785" column="71" selection-start-line="785" selection-start-column="71" selection-end-line="785" selection-end-column="71" />
-          <folding>
-            <element signature="e#0#57#0" expanded="true" />
-            <marker date="1543720232737" expanded="true" signature="881:939" ph="..." />
-            <marker date="1543720232737" expanded="true" signature="16449:16991" ph="..." />
-            <marker date="1543720232737" expanded="true" signature="18879:18884" ph="..." />
-            <marker date="1543720232737" expanded="true" signature="19473:20339" ph="..." />
-            <marker date="1543720232737" expanded="true" signature="20662:20663" ph="..." />
-            <marker date="1543720232737" expanded="true" signature="21023:21024" ph="..." />
-            <marker date="1543720232737" expanded="true" signature="22888:22889" ph="..." />
-            <marker date="1543720232737" expanded="true" signature="23398:23399" ph="..." />
-          </folding>
+        <state relative-caret-position="510">
+          <caret line="34" column="14" lean-forward="true" selection-start-line="34" selection-start-column="14" selection-end-line="34" selection-end-column="14" />
         </state>
       </provider>
     </entry>

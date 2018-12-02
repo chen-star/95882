@@ -5,22 +5,24 @@
 {% endblock %}
 {% block content %}
     <div align="center">
-        <h2 class="text-success">Similar Users recommend for U!</h2>
+        <h2 class="text-dark">Similar Users recommend for U!</h2>
     </div>
 
-    {% if items %}
+    {% if recommendations %}
         <div align="center">
-            <h4>Websites related to your search sentence: </h4>
             <div class="pre-scrollable" style="max-height: 60vh">
                 <ul class="list-group pt-0">
                     <li class="list-group-item" id="new_posts">
-                        {% for item in items %}
+                        {% for key, val in recommendations.items %}
                             <div class="card flex-md-row mb-4 mt-4 box-shadow h-md-250">
                                 <div class="card-body d-flex col-md-12 flex-column align-items-start">
-                                    <h4 class="mb-0">
-                                        <p class="text-muted">{{ item.0 }}</p>
-                                    </h4>
-                                    <a class="mb-1 text-primary" href="{{ item.1 }}">{{ item.1}}</a>
+                                    <h3 class="mb-0">
+                                        <strong class="text-dark">{{ key }}</strong>
+                                    </h3>
+                                    <br>
+                                    <h5 class="mb-0">
+                                        <p class="text-success">Common Tags with u: {{ val }}</p>
+                                    </h5>
                                     <hr>
                                 </div>
                             </div>

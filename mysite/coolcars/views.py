@@ -17,6 +17,7 @@ from coolcars.tokens import account_activation_token
 from gsearch.googlesearch import search
 import csv
 import os
+from coolcars.trainUserData import *
 
 
 # home
@@ -783,12 +784,26 @@ def recommendations(request):
         for user in users:
             if user.username == 'admin':
                 continue
-            searched = Search.objects.get(username=user).searches.all()
-            spamwriter = csv.writer(csvfile, delimiter='\t',
+            posts = Post.objects.filter(username=user)
+            spamwriter = csv.writer(csvfile, delimiter=',',
                                     quotechar='|', quoting=csv.QUOTE_MINIMAL)
             tmp = [user.username]
-            for tag in searched:
-                tmp.append(str(tag))
+            for post in posts:
+                tags = post.tags.all()
+                for t in tags:
+                    tmp.append(t)
             spamwriter.writerow(tmp)
 
-    return render(request, 'recommendation.html')
+    # training model
+    recommendation = train(request.user.username)
+    recommendations = {}
+    for key, val in recommendation.items():
+        tmp = ''
+        for v in val:
+            tmp = tmp + ' #' + v + '# '
+        recommendations[key] = tmp
+
+    context = {}
+    context['recommendations'] = recommendations
+
+    return render(request, 'recommendation.html', context)
