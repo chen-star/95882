@@ -55,6 +55,9 @@
                             <h4 class="mb-0">
                                 <p class="text-dark">{{ value.2 }}</p>
                             </h4>
+                            {% if value.6 %}
+                                <h6 class="text-success">Tags: {{ value.6 }}</h6>
+                            {% endif %}
                             <div class="mb-1 text-muted">{{ value.4 }} Favorite: {{ value.5 }}</div>
                             <p class="card-text mb-auto">{{ value.3 }}</p>
                             {% if logged %}
@@ -63,6 +66,17 @@
                                     <input type="text" name="post_id" id="post_id" value="{{ value.0 }}"
                                            hidden="hidden">
                                     <button class="btn btn-sm btn-danger" type="submit">Favorite</button>
+                                </form>
+                            {% endif %}
+                            <br><br>
+                            {% if logged %}
+                                <form id="{{ value.0 }}" method="post" action="{% url 'tagging' %}"
+                                      class="new_comment">{% csrf_token %}
+                                    <input type="text" name="post_id" id="post_id" value="{{ value.0 }}"
+                                           hidden="hidden">
+                                    <input type="text" name="tagging" id="new_input_comment{{ value.0 }}"
+                                           placeholder="add tag here.." required><br><br>
+                                    <button class="btn btn-sm btn-success" type="submit">Add Tag</button>
                                 </form>
                             {% endif %}
                             <hr>

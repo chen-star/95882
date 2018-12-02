@@ -28,5 +28,7 @@ urlpatterns = [
                   url(r'^notification', views.notification, name='notification'),
                   url(r'^vote', views.vote, name='vote'),
                   url(r'^favorite', views.favorite, name='favorite'),
+                  url(r'^tagging', views.tagging, name='tagging'),
+                  url(r'^searchByTagging', views.search_by_tagging, name='search_by_tagging'),
 
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

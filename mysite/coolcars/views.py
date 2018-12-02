@@ -113,7 +113,6 @@ def car_stream(request):
         dic['logged'] = True
 
     posts = Post.objects.all().order_by("-favorite")
-    print(posts)
 
     comments = Comment.objects.all().order_by("time")
     coms = {}
@@ -146,6 +145,13 @@ def car_stream(request):
         li.append(content)
         li.append(published_date)
         li.append(current_post.favorite)
+        if len(current_post.tags.all()) > 0:
+            ta = ''
+            for t in current_post.tags.all():
+                ta = ta + " #" + str(t) + "#"
+            li.append(ta)
+        else:
+            li.append(None)
         count += 1
         temp[postno] = li
 
@@ -538,12 +544,12 @@ def search_user(request):
     except:
         return render(request, 'noSuchUser.html')
 
-    posts = Post.objects.filter(username__in=user).order_by("-published_date")
+    posts = Post.objects.filter(username__in=user)
     comments = Comment.objects.all().order_by("time")
 
     tmp = []
     for u in user:
-        p = Post.objects.filter(username=u).order_by("-published_date")
+        p = Post.objects.filter(username=u).order_by("-favorite")
         for p1 in p:
             tmp.append(p1)
     posts = tmp
@@ -578,6 +584,14 @@ def search_user(request):
         li.append(content)
         li.append(published_date)
         li.append(Vote.objects.get(username=current_post.username).no_vote)
+        li.append(current_post.favorite)
+        if len(current_post.tags.all()) > 0:
+            ta = ''
+            for t in current_post.tags.all():
+                ta = ta + " #" + str(t) + "#"
+            li.append(ta)
+        else:
+            li.append(None)
         count += 1
         temp[postno] = li
 
@@ -640,3 +654,79 @@ def favorite(request):
     post.save()
 
     return redirect(reverse('car_stream'))
+
+
+@login_required
+def tagging(request):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('home'))
+
+    tag = request.POST.get('tagging', '')
+    post_id = request.POST.get('post_id', '')
+    post = Post.objects.get(id=post_id[4:])
+    post.tags.add(tag)
+    post.save()
+
+    return redirect(reverse('car_stream'))
+
+
+@login_required
+def search_by_tagging(request):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('home'))
+
+    if request.method == 'GET':
+        return render(request, 'SearchByTagging.html')
+
+    dic = {}
+    tag = request.POST.get('tag', '')
+    try:
+        posts = Post.objects.filter(tags__in=tag).order_by("-favorite")
+    except:
+        return render_to_response('noSuchTag.html')
+    comments = Comment.objects.all().order_by("time")
+
+    coms = {}
+    for comment in comments:
+        com = {}
+        current_comment = "comment" + str(comment.id)
+        current_post = "post" + str(comment.post.id)
+        username = comment.username.username
+        content = comment.content
+        time = comment.time
+        com["post_id"] = current_post
+        com["username"] = username
+        com["content"] = content
+        com["time"] = time
+        coms[current_comment] = com
+
+    temp = {}
+    count = 0
+    for post in posts:
+        current_post = posts[count]
+        postno = 'post' + str(post.id)
+        li = []
+        username = current_post.username
+        title = current_post.title
+        content = current_post.content
+        published_date = current_post.published_date
+        li.append(postno)
+        li.append(username)
+        li.append(title)
+        li.append(content)
+        li.append(published_date)
+        li.append(Vote.objects.get(username=current_post.username).no_vote)
+        li.append(current_post.favorite)
+        if len(current_post.tags.all()) > 0:
+            ta = ''
+            for t in current_post.tags.all():
+                ta = ta + " #" + str(t) + "#"
+            li.append(ta)
+        else:
+            li.append(None)
+        count += 1
+        temp[postno] = li
+
+    dic["posts"] = temp
+    dic["comments"] = coms
+    return render(request, "SearchByTagging.html", dic)

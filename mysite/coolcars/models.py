@@ -1,4 +1,5 @@
 from django.db import models
+from taggit.managers import TaggableManager
 
 # user info
 from django.utils import timezone
@@ -22,6 +23,7 @@ class Post(models.Model):
     content = models.CharField(max_length=100)
     published_date = models.DateTimeField(default=timezone.now)
     favorite = models.IntegerField(default=0)
+    tags = TaggableManager()
 
     def __str__(self):
         return "{0}, {1}, {2}, {3}, {4}".format(self.username, self.title, self.content, self.published_date, self.favorite)
