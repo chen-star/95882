@@ -45,9 +45,10 @@ class Notification(models.Model):
     title = models.CharField(max_length=100)
     content = models.CharField(max_length=300)
     time = models.DateTimeField(default=timezone.now)
+    read = models.BooleanField(default=False)
 
     def __str__(self):
-        return "{0}, {1}, {2}".format(self.title, self.content, self.time)
+        return "{0}, {1}, {2}, {3}".format(self.title, self.content, self.time, self.read)
 
 
 # votes

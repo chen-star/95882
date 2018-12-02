@@ -14,6 +14,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
 from coolcars.forms import *
 from coolcars.tokens import account_activation_token
+from gsearch.googlesearch import search
 
 
 # home
@@ -604,9 +605,19 @@ def search_user(request):
 def notification(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse('home'))
-    context = {}
 
-    notifications = Notification.objects.all().order_by("-time")
+    if request.method == 'GET':
+        context = {}
+        notifications = Notification.objects.filter(read=False).order_by("-time")
+        context['notifications'] = notifications
+        return render(request, 'notification.html', context)
+
+    notification_id = request.POST.get('notification_id', '')
+    n = Notification.objects.get(id=notification_id)
+    n.read = True
+    n.save()
+    context = {}
+    notifications = Notification.objects.filter(read=False).order_by("-time")
     context['notifications'] = notifications
     return render(request, 'notification.html', context)
 
@@ -730,3 +741,18 @@ def search_by_tagging(request):
     dic["posts"] = temp
     dic["comments"] = coms
     return render(request, "SearchByTagging.html", dic)
+
+
+@login_required
+def NLSearch(request):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('home'))
+
+    if request.method == 'GET':
+        return render(request, 'NLSearch.html')
+
+    context = {}
+    content = request.POST.get('content', '')
+    results = search(content, num_results=15)
+    context['items'] = results
+    return render(request, 'NLSearch.html', context)
