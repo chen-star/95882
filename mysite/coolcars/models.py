@@ -26,8 +26,8 @@ class Post(models.Model):
     tags = TaggableManager()
 
     def __str__(self):
-        return "{0}, {1}, {2}, {3}, {4}".format(self.username, self.title, self.content, self.published_date,
-                                                self.favorite)
+        return "{0}, {1}, {2}, {3}, {4}, pk: {5}".format(self.username, self.title, self.content, self.published_date,
+                                                         self.favorite, self.pk)
 
 
 # comments

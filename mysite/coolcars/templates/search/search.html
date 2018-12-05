@@ -1,0 +1,53 @@
+{% extends 'base_structure.html' %}
+{% block title %}Search{% endblock %}
+{% block links %}
+    {% include 'base_logined_headers.html' %}
+{% endblock %}
+{% block content %}
+    <div align="center">
+        <h2>General Search</h2>
+        <div class="d-flex flex-row justify-content-center pb-2 pt-3 align-self-center">
+            <form method="get" action="" class="form-horizontal">
+                <table>
+                    {{ form.as_table }}
+                    <br>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>
+                            <input class="btn btn-primary" type="submit" value="Search">
+                        </td>
+                    </tr>
+                </table>
+                {% if "q" in request.GET %}
+                    <br>
+                    <hr>
+                    <h3>Posts containing "{{ cd.q }}"</h3>
+                    <h4>Found {{ total_results }} result{{ total_results|pluralize }}</h4>
+                    <br>
+                    {% for result in results %}
+                        <p class="text-primary">{{ result.object.title }}</p>
+                        <p class="text-muted">{{ result.object.username.username }} {{ result.object.published_date }}
+                            Upvote: {{ result.object.favorite }}</p>
+                        <p class="text-dark">{{ result.object.content }}</p>
+                        <hr>
+                    {% empty %}
+                    {% endfor %}
+                    {% if page.has_previous or page.has_next %}
+                        <div>
+                            {% if page.has_previous %}
+                                <a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo;
+                            Previous
+                            {% if page.has_previous %}</a>{% endif %}
+                            |
+                            {% if page.has_next %}
+                                <a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next
+                            &raquo;{% if page.has_next %}</a>{% endif %}
+                        </div>
+                    {% endif %}
+                {% else %}
+
+                {% endif %}
+            </form>
+        </div>
+    </div>
+{% endblock %}

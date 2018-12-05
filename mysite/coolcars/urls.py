@@ -1,9 +1,9 @@
 from django.conf.urls import url
 from django.conf.urls.static import static
 from django.conf import settings
-from django.urls import path, re_path
+from django.urls import path, re_path, include
 
-from coolcars import views
+from coolcars import views, search_views
 
 urlpatterns = [
                   url(r'^$', views.home, name='home'),
@@ -32,5 +32,7 @@ urlpatterns = [
                   url(r'^searchByTagging', views.search_by_tagging, name='search_by_tagging'),
                   url(r'^nlSearch', views.NLSearch, name='nlSearch'),
                   url(r'^Recommendations', views.recommendations, name='recommendations'),
+                  # url(r'^search/', include('haystack.urls')),
+                  url(r'^search/', search_views.post_search, name='haystack_search')
 
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

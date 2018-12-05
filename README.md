@@ -2,9 +2,11 @@
 
 -----------------
 
+
 A featureful and interactive web application for drivers share car information. 
 
 Get started with your car journey!
+
 
 ## Introduction & Demo ##
 
@@ -39,6 +41,10 @@ Get started with your car journey!
    
    You can search user posts by type in their usernames with colon seperation.
    
+   *  Sort post upvotes
+   ![](READMEIMG/3-2.png)
+   
+   * 	Sort user likes
    Sort: This result has been sorted by the number of vote of each user. The user with higher vote will be displayed first.
    
    ![](READMEIMG/3-1.png)
@@ -109,6 +115,9 @@ Get started with your car journey!
 	* rsa	4.0	
 	* setuptools	39.1.0	
 	* six	1.11.0	
+	* Whoosh	2.7.4
+	* django-haystack	2.8.1	
+
 
 ## Instruction ##
 
@@ -139,6 +148,8 @@ Get started with your car journey!
 	* `pip install rsa	4.0	`
 	* `pip install setuptools	39.1.0	`
 	* `pip install six	1.11.0	`
+	* `pip install 	Whoosh	2.7.4`
+	* `pip install 	django-haystack	2.8.1`
 
 * Migrate Database:
 

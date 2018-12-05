@@ -1,0 +1,137 @@
+{% extends 'base_structure.html' %}
+{% block title %}Global Stream{% endblock %}
+{% block links %}
+    {% if logged %}
+        {% include 'base_logined_headers.html' %}
+    {% endif %}
+    {% if not logged %}
+        <a class="py-2 d-none d-md-inline-block text-light bg-dark" href="{% url 'user_login' %}">Log In</a>
+        <a class="py-2 d-none d-md-inline-block text-light bg-dark" href="{% url 'registration' %}">Registration</a>
+    {% endif %}
+{% endblock %}
+{% block content %}
+    {% load static %}
+    <div align="center">
+        {% if logged %}
+            <h4>Make a new post</h4>
+            <div class="d-flex flex-row justify-content-center pb-2 pt-3 align-self-center">
+                <form action="{% url 'add_post' %}" method="post" class="form-horizontal" role="form">{% csrf_token %}
+                    <div class="form-group">
+                        Title: <input class="form-control" type="text" name="title" id="post_title">
+                    </div>
+                    <div class="form-group">
+                        Content: <textarea class="form-control" name="content" id="post_content"
+                                           maxlength="100"></textarea>
+                    </div>
+                    <input class="btn btn-primary" type="submit" value="Post">
+                </form>
+            </div>
+        {% endif %}
+    </div>
+    <hr>
+    <h1>Posts</h1>
+    <div class="pre-scrollable" style="max-height: 60vh">
+        <ul class="list-group pt-0">
+            <li class="list-group-item" id="new_posts">
+                {% for key, value in posts.items %}
+                    <div class="card flex-md-row mb-4 mt-4 box-shadow h-md-250">
+                        <div class="card-body d-flex col-md-12 flex-column align-items-start">
+                            <div class="row mb-1">
+                                {% load static %}
+                                <img class="card-img-right flex-auto d-none d-lg-block"
+                                     data-src="holder.js/200x250?theme=thumb" alt="Thumbnail [200x250]"
+                                     style="width: 50px; height: 50px;"
+                                     src="{% static 'img/profile1.jpg' %}"
+                                     data-holder-rendered="true">
+                                {% if logged %}
+                                    <a class="d-inline-block mb-1 ml-3 text-primary align-content-center"
+                                       href="{% url 'profile' %}?username={{ value.1 }}"><strong>{{ value.1 }}</strong></a>
+                                {% endif %}
+                                {% if not logged %}
+                                    <a class="d-inline-block mb-1 ml-3 text-primary align-content-center"
+                                       href="#"><strong>{{ value.1 }}</strong></a>
+                                {% endif %}
+                            </div>
+                            <h4 class="mb-0">
+                                <p class="text-dark">{{ value.2 }}</p>
+                            </h4>
+                            {% if value.6 %}
+                                <h6 class="text-success">Tags: {{ value.6 }}</h6>
+                            {% endif %}
+                            <div class="mb-1 text-muted">{{ value.4 }} Upvote: {{ value.5 }}</div>
+                            <p class="card-text mb-auto">{{ value.3 }}</p>
+                            {% if logged %}
+                                <form id="{{ value.0 }}" method="post" action="{% url 'favorite' %}"
+                                      class="new_comment">{% csrf_token %}
+                                    <input type="text" name="post_id" id="post_id" value="{{ value.0 }}"
+                                           hidden="hidden">
+                                    <button class="btn btn-sm btn-danger" type="submit">Upvote</button>
+                                </form>
+                            {% endif %}
+                            <br><br>
+                            {% if logged %}
+                                <form id="{{ value.0 }}" method="post" action="{% url 'tagging' %}"
+                                      class="new_comment">{% csrf_token %}
+                                    <input type="text" name="post_id" id="post_id" value="{{ value.0 }}"
+                                           hidden="hidden">
+                                    <input type="text" name="tagging" id="new_input_comment{{ value.0 }}"
+                                           placeholder="add tag here.." required><br><br>
+                                    <button class="btn btn-sm btn-success" type="submit">Add Tag</button>
+                                </form>
+                            {% endif %}
+                            <hr>
+
+                            {#comment#}
+                            <div id="comments" class="">
+                                {% if logged %}
+                                    <form id="{{ value.0 }}" method="post" action="{% url 'add_comment' %}"
+                                          class="new_comment">{% csrf_token %}
+                                        <input type="text" name="comment_content" id="new_input_comment{{ value.0 }}"
+                                               placeholder="add comment here.." required><br><br>
+                                        <input type="text" name="post_id" id="post_id" value="{{ value.0 }}"
+                                               hidden="hidden">
+                                        <button class="btn btn-sm btn-primary" type="submit">Comment</button>
+                                    </form>
+                                {% endif %}
+                                <hr>
+                                <div id="previous_comments">
+                                    <div class="panel-footer" id="previous_comments{{ value.0 }}">
+                                        {% for key, comment in comments.items %}
+                                            {% if comment.post_id == value.0 %}
+                                                <div class="row mb-1">
+                                                    {% load static %}
+                                                    <img class="card-img-right flex-auto d-none d-lg-block"
+                                                         data-src="holder.js/200x250?theme=thumb"
+                                                         alt="Thumbnail [200x250]"
+                                                         style="width: 20px; height: 20px;"
+                                                         src="{% static 'img/profile1.jpg' %}"
+                                                         data-holder-rendered="true">
+                                                    {% if logged %}
+                                                        <a class="d-inline-block mb-1 ml-3 ml-2 pl-2 text-primary align-content-center"
+                                                           href="{% url 'profile' %}?username={{ comment.username }}"><strong>{{ comment.username }}</strong></a>
+                                                    {% endif %}
+                                                    {% if not logged %}
+                                                        <a class="d-inline-block mb-1 ml-3 ml-2 pl-2 text-primary align-content-center"
+                                                           href="#"><strong>{{ comment.username }}</strong></a>
+                                                    {% endif %}
+                                                    <p align="right" class="text-muted mr-2 pl-2" size="">
+                                                        <small>{{ comment.time }}</small>
+                                                    </p>
+                                                </div>
+                                                <p>
+                                                    {{ comment.content }}
+                                                </p>
+                                                <hr>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </li>
+        </ul>
+    </div>
+
+{% endblock %}

@@ -18,6 +18,7 @@ from gsearch.googlesearch import search
 import csv
 import os
 from coolcars.trainUserData import *
+from haystack.generic_views import SearchView
 
 
 # home

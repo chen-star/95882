@@ -1,7 +1,9 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib import auth
+from django.core.paginator import Paginator
 from django.utils import timezone
+from haystack.forms import *
 
 from coolcars.models import *
 
@@ -57,3 +59,16 @@ class RegisterForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+
+
+class MySearchForm(SearchForm):
+
+    def search(self):
+        # First, store the SearchQuerySet received from other processing.
+        sqs = super(SearchForm, self).search().order_by('-favorite')
+        paginator = Paginator(sqs, int(10))
+        page = paginator.page(int(3))
+        sqs = sorted(page.object_list, key=lambda k: k['-favorite'])
+        # sqs = SearchQuerySet().models(Post).order_by('-favorite', '-published_date')
+
+        return sqs
