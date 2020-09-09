@@ -1,4 +1,4 @@
-# 95882 Final Project -- Cool Cars Website
+Cool Cars Website
 
 -----------------
 
